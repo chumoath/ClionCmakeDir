@@ -2,6 +2,7 @@ import os
 
 subdirectories = []
 
+
 def list_subdirectories(prefix, directory):
 	try:
         # 获取目录下的所有文件和子目录
@@ -38,6 +39,7 @@ if __name__ == "__main__":
 			f.write("\n")
 
 			f.write("SET(INCLUDE_LIST\n")
+			f.write("	${CMAKE_SOURCE_DIR}\n")
 			for subdir in subdirectories:
 				f.write("	" + subdir + "\n")
 			f.write(")\n")
@@ -45,6 +47,7 @@ if __name__ == "__main__":
 			
 			f.write("\n")
 
+			f.write("AUX_SOURCE_DIRECTORY(${CMAKE_SOURCE_DIR} SRC_LIST)\n")
 			for subdir in subdirectories:
 				f.write("AUX_SOURCE_DIRECTORY(" + subdir + " SRC_LIST)\n")
 			f.write("ADD_LIBRARY(BMCx SHARED ${SRC_LIST})\n")
